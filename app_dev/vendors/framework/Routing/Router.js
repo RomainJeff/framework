@@ -30,7 +30,7 @@ class Router {
      *
      */
     run(routesContainer) {
-        var routesMatcher = new RoutesMatcher(location.pathname, routesContainer.get());
+        var routesMatcher = new RoutesMatcher(this.HTTP.getURI(), routesContainer.get());
 
         routesMatcher.check();
         routesMatcher.listen();
