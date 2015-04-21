@@ -4,11 +4,24 @@ class RoutesContainer {
         this.routes = [];
     }
 
+    /**
+     *
+     * Add a route
+     * @param string path
+     * @param function callback
+     *
+     */
     add(path, callback) {
         this.routes[path] = callback;
     }
 
-    get(path) {
-        return this.routes[path];
+    /**
+     *
+     * Get the routes
+     * @return array
+     *
+     */
+    get() {
+        return this.routes;
     }
 }
