@@ -5,10 +5,14 @@ class Http {
     }
 
     getURI() {
-        return this.location.pathname;
+        return this.get('pathname');
     }
 
     set(key, value) {
         this.location[key] = value;
+    }
+
+    get(key) {
+        return this.location[key];
     }
 }
