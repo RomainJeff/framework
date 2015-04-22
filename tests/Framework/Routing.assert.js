@@ -1,14 +1,14 @@
 describe('[FRAMEWORK][ROUTING]', function () {
-    var route = {
-        path: '/{username}',
-        datas: {username: '([a-z]+)'}
-    };
     var HttpInterface = new Http({ pathname: '/world' });
     var RoutingMatcher = new RoutesMatcher(HttpInterface.getURI(), {});
+    var RoutingDecoder = new RouteDecoder({
+        path: '/{username}',
+        datas: {username: '([a-z]+)'},
+        callback: function () { return "OK"; }
+    });
 
-
-    it('Test de RoutesMatcher.formatRoutePath', function() {
-        expect(RoutingMatcher.formatRoutePath(route)).toBe('/([a-z]+)');
+    it('Test de RouteDecoder.formatRoutePath', function() {
+        expect(RoutingDecoder.getDecodedPath()).toBe('/([a-z]+)');
     });
 
     it('Test de RoutesMatcher.isMatching', function() {
@@ -19,8 +19,12 @@ describe('[FRAMEWORK][ROUTING]', function () {
         expect(RoutingMatcher.isMatching('/hello')).not.toEqual(jasmine.any(Array));
     });
 
-    it('Test de RoutesMatcher.getDatasToInject', function() {
-        var datas = RoutingMatcher.isMatching('/([a-z]+)');
-        expect(RoutingMatcher.getDatasToInject(route.datas, datas).username).toBe('world');
+    it('Test de RouteDecoder.getParameters', function() {
+        var rawParams = RoutingMatcher.isMatching('/([a-z]+)');
+        expect(RoutingDecoder.getParameters(rawParams).username).toBe('world');
+    });
+
+    it('Test de RouteDecoder.getCallback', function() {
+        expect(RoutingDecoder.getCallback()).toBe('OK');
     });
 });
