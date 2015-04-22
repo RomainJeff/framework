@@ -1,12 +1,12 @@
-describe('[FRAMEWORK][HTTP]', function () {
-    var HttpInstance = new Http({hash: '/'});
+describe('[FRAMEWORK][HTTPRESPONSE]', function () {
+    var HttpResponseInstance = new HttpResponse({hash: '/'});
 
-    it('Test HTTP.getURI()', function () {
-        expect(HttpInstance.getURI()).toBe('/');
+    it('Test HttpResponse.getURI()', function () {
+        expect(HttpResponseInstance.getURI()).toBe('/');
     });
 
-    it('Test HTTP.setURI()', function () {
-        HttpInstance.setURI('/test');
-        expect(HttpInstance.getURI()).toBe('/test');
+    it('Test HttpResponse.setURI()', function () {
+        HttpResponseInstance.setURI('/test');
+        expect(HttpResponseInstance.getURI()).toBe('/test');
     });
 });
