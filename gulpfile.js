@@ -6,7 +6,7 @@ var uglifyConfig = {
 var jasmineConfig = {
     integration: true,
     abortOnFail: true,
-    vendor: [prodPath +'/scripts/**/*.js']
+    vendor: [prodPath +'/**/*.js']
 };
 
 var gulp        = require('gulp');
@@ -15,12 +15,7 @@ var babel       = require('gulp-babel');
 var concat      = require('gulp-concat');
 var sourcemaps  = require('gulp-sourcemaps');
 var jasmine     = require('gulp-jasmine-phantom');
-//var serve       = require('gulp-serve');
-//var useref      = require('gulp-useref');
-//var compass     = require('gulp-for-compass');
 var uglify      = require('gulp-uglify');
-//var clean       = require('gulp-clean');
-//var rename      = require('gulp-rename');
 
  
 
