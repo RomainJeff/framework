@@ -14,7 +14,6 @@ class RouteDecoder {
     /**
      *
      * Format the URL to test with the current PATH
-     * @param object route
      * @return string
      *
      */
@@ -33,7 +32,6 @@ class RouteDecoder {
     /**
      *
      * Get datas associated with the keys
-     * @param object routeDatas
      * @param object matchedDatas
      * @return object
      *
