@@ -11,8 +11,11 @@ class RoutesContainer {
      * @param function callback
      *
      */
-    add(path, callback) {
-        this.routes[path] = callback;
+    add(callback, optns) {
+        this.routes.push({
+            options: optns,
+            callback: callback
+        });
     }
 
     /**
