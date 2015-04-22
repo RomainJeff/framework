@@ -7,7 +7,7 @@ class Router {
      ***********
      * EXAMPLE
      ***********
-     * var Routing = new Router(new HTTP());
+     * var Routing = new Router(new HTTP(location));
      *
      */
     constructor(HTTP) {
