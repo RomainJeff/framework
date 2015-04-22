@@ -16,46 +16,6 @@ class RoutesMatcher {
 
     /**
      *
-     * Format the URL to test with the current PATH
-     * @param object route
-     * @return string
-     *
-     */
-    formatRoutePath(route) {
-        var routeToParse = route.path;
-        var datas = route.datas;
-
-        for (var data in datas) {
-            routeToParse = routeToParse.replace("{"+ data +"}", datas[data]);
-        }
-
-        return routeToParse;
-    }
-
-
-    /**
-     *
-     * Get datas associated with the keys
-     * @param object routeDatas
-     * @param object matchedDatas
-     * @return object
-     *
-     */
-    getDatasToInject(routeDatas, matchedDatas) {
-        var i = 1;
-        var datasToInject = {};
-
-        for (var data in routeDatas) {
-            datasToInject[data] = matchedDatas[i];
-            i++;
-        }
-
-        return datasToInject;
-    }
-
-
-    /**
-     *
      * Verify if any route matchs the current path
      * @param string routePath
      *
@@ -79,24 +39,17 @@ class RoutesMatcher {
     /**
      *
      * Coords the routing system
-     * @return boolean
+     * @return function
      *
      */
     check() {
         for (var route in this.routes) {
-            var currentRoute = this.routes[route];
-            var routePath = this.formatRoutePath(currentRoute);
-            var matching = this.isMatching(routePath);
+            var currentRoute = new RouteDecoder(this.routes[route]);
+            var matching = this.isMatching(currentRoute.getDecodedPath());
 
-            if (matching) {
-                var routeDatas = this.routes[route].datas;
-
-                currentRoute.callback(this.getDatasToInject(routeDatas, matching));
-                return true;
-            }
+            if (matching) return currentRoute.getCallback(currentRoute.getParameters());
         }
 
-        this.defaultPage();
-        return false;
+        return this.defaultPage();
     }
 }
