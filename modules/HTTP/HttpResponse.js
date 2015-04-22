@@ -1,9 +1,9 @@
-class Http {
-    
+class HttpResponse {
+
     constructor(loc) {
         this.location = loc;
     }
-
+    
     setURI(uri, params) {
         this.set('hash', uri);
 
@@ -14,11 +14,11 @@ class Http {
         return this.get('hash');
     }
 
-    set(key, value) {
-        this.location[key] = value;
-    }
-
     get(key) {
         return this.location[key];
+    }
+
+    set(key, value) {
+        this.location[key] = value;
     }
 }
