@@ -1,5 +1,5 @@
 describe('[FRAMEWORK][ROUTING]', function () {
-    var HttpInterface = new Http({ pathname: '/world' });
+    var HttpInterface = new Http({ hash: '/world' });
     var RoutingMatcher = new RoutesMatcher(HttpInterface.getURI(), {});
     var RoutingDecoder = new RouteDecoder({
         path: '/{username}',
