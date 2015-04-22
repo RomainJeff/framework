@@ -1,7 +1,7 @@
 class Http {
     
-    construct () {
-        this.location = location;
+    constructor(loc) {
+        this.location = loc;
     }
 
     getURI() {
@@ -10,6 +10,5 @@ class Http {
 
     set(key, value) {
         this.location[key] = value;
-        location = this.location;
     }
 }
