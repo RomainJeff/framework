@@ -55,7 +55,7 @@ gulp.task('uglifyVendors', ['compileVendors'], function () {
 
 /** COMPILE FRAMEWORK **/
 gulp.task('compileFramework', function () {
-    return gulp.src(devPath +'/vendors/framework/*.js')
+    return gulp.src(devPath +'/vendors/framework/**/*.js')
         .pipe(sourcemaps.init())
         .pipe(concat("framework.js"))
         .pipe(babel())
@@ -126,7 +126,7 @@ gulp.task('lintServices', function() {
 
 
 /** RUN TESTS **/ 
-gulp.task('tests', ['compileServices'], function () {
+gulp.task('tests', ['compileFramework', 'compileServices'], function () {
     return gulp.src('tests/**/*.js')
         .pipe(jasmine(jasmineConfig));
 });
