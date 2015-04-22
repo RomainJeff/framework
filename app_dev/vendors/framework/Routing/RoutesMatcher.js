@@ -7,7 +7,7 @@ class RoutesMatcher {
      * @param array routes
      *
      */
-    construct(uri, routes) {
+    constructor(uri, routes) {
         this.uri = uri;
         this.routes = routes;
         this.defaultPage = function () {};
@@ -25,7 +25,7 @@ class RoutesMatcher {
         var routeToParse = route.path;
         var datas = route.datas;
 
-        for (data in datas) {
+        for (var data in datas) {
             routeToParse = routeToParse.replace("{"+ data +"}", datas[data]);
         }
 
@@ -45,7 +45,7 @@ class RoutesMatcher {
         var i = 1;
         var datasToInject = {};
 
-        for (data in routeDatas) {
+        for (var data in routeDatas) {
             datasToInject[data] = matchedDatas[i];
             i++;
         }
@@ -83,7 +83,7 @@ class RoutesMatcher {
      *
      */
     check() {
-        for (route in this.routes) {
+        for (var route in this.routes) {
             var currentRoute = this.routes[route];
             var routePath = this.formatRoutePath(currentRoute);
             var matching = this.isMatching(routePath);
