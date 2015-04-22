@@ -1,6 +1,15 @@
 class Http {
     
+    construct () {
+        this.location = location;
+    }
+
     getURI() {
-        return location.pathname;
+        return this.location.pathname;
+    }
+
+    set(key, value) {
+        this.location[key] = value;
+        location = this.location;
     }
 }
