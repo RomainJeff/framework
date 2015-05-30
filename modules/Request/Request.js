@@ -8,6 +8,7 @@ class Request {
         this.url = url;
         this.datas = {};
         this.headers = {};
+        this.response = {};
         this.callback = function () {};
     }
 
@@ -66,12 +67,12 @@ class Request {
 
         fetch(this.url, options)
             .then((response) => {
-                if (response.ok === true) {
-                    this.callback(new RequestResponse(response));
-                } else {
-                    RequestErrorHandler.onError(response);
-                }
-            }.bind(this));
+                if (response.ok === true)
+                    return response.text();
+
+                throw new Error(response.statusText);
+            })
+            .then(this.callback);
     }
 
 

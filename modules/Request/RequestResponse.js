@@ -37,7 +37,7 @@ class RequestResponse {
      * @return string
      */
     getBody() {
-        return this.response.body;
+        return this.response.text();
     }
 
     /**
