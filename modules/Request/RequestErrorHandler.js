@@ -1,5 +1,7 @@
 var RequestErrorHandler = {
-    onError: function () {}
+    onError: function (error) {
+        console.log(error);
+    }
 };
 
 

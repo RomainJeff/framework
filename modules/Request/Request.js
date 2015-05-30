@@ -8,7 +8,7 @@ class Request {
         this.url = url;
         this.datas = {};
         this.headers = {};
-        this.success = function () {};
+        this.callback = function () {};
     }
 
     /**
@@ -43,10 +43,12 @@ class Request {
 
     /**
      * Define the success callback
-     * @param string url
+     * @param function callback
      */
     success(callback) {
-        this.success = callback;
+        this.callback = callback;
+
+        return this;
     }
 
     /**
@@ -54,17 +56,22 @@ class Request {
      * @param string method
      */
     execute(method) {
-        fetch(this.url, {
+        var options = {
             method: method,
-            headers: this.headers,
-            body: JSON.stringify(this.datas)
-        })
-        .then(function (response) {
-            this.callback(new RequestResponse(response));
-        }.bind(this))
-        .catch(function (error) {
-            RequestErrorHandler.onError(error);
-        });
+            headers: this.headers
+        };
+        
+        if (method != 'GET')
+            options.body = JSON.stringify(this.datas);
+
+        fetch(this.url, options)
+            .then((response) => {
+                if (response.ok === true) {
+                    this.callback(new RequestResponse(response));
+                } else {
+                    RequestErrorHandler.onError(response);
+                }
+            }.bind(this));
     }
 
 
@@ -72,28 +79,28 @@ class Request {
     /**
      * Execute the request with GET method
      */
-    get() {
+    GET() {
         this.execute('GET');
     }
 
     /**
      * Execute the request with POST method
      */
-    post() {
+    POST() {
         this.execute('POST');
     }
 
     /**
      * Execute the request with DELETE method
      */
-    delete() {
+    DELETE() {
         this.execute('DELETE');
     }
 
     /**
      * Execute the request with PUT method
      */
-    put() {
+    PUT() {
         this.execute('PUT');
     }
 }
