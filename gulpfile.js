@@ -20,8 +20,8 @@ var uglify      = require('gulp-uglify');
  
 
 /** COMPILE MODULES **/
-gulp.task('compileServices', ['lintModules'], function () {
-    return gulp.src(devPath +'/modules/**/*.js')
+gulp.task('compileModules', ['lintModules'], function () {
+    return gulp.src([devPath +'/modules/**/*.js'])
         .pipe(sourcemaps.init())
         .pipe(concat("framework.js"))
         .pipe(babel())
@@ -56,11 +56,11 @@ gulp.task('lintModules', function() {
 
 
 /** RUN TESTS **/ 
-gulp.task('tests', ['compileServices'], function () {
+gulp.task('tests', ['compileModules'], function () {
     return gulp.src('tests/**/*.js')
         .pipe(jasmine(jasmineConfig));
 });
 
 
 /** TASK PROD **/
-gulp.task('prod', ['compileServices', 'uglifyVendors']);
+gulp.task('prod', ['compileModules', 'uglifyVendors']);
