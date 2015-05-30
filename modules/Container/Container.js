@@ -8,7 +8,7 @@ class Container {
      * @return object
      *
      */
-    add(key, instance) {
+    register(key, instance) {
         this.__defineGetter__(key, instance);
 
         return this;
