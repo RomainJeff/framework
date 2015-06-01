@@ -48,7 +48,7 @@ class RoutesMatcher {
             var matching = this.isMatching(currentRoute.getDecodedPath());
 
             if (matching) {
-                currentRoute.getCallback(currentRoute.getParameters())();
+                currentRoute.getCallback(currentRoute.getParameters());
                 return;
             }
         }
