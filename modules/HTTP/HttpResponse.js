@@ -13,7 +13,7 @@ class HttpResponse {
     }
 
     getURI() {
-        return this.get('hash');
+        return this.get('hash').replace('#', '');
     }
 
     onURIChange(callback) {
