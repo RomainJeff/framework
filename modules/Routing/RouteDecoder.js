@@ -18,8 +18,11 @@ class RouteDecoder {
      *
      */
     formatRoutePath() {
-        var routeToParse = this.route.path;
-        var datas = this.route.datas;
+        var routeToParse = this.route.options.path;
+        var datas = this.route.options.datas;
+
+        if (!datas)
+            return routeToParse;
 
         for (var data in datas) {
             routeToParse = routeToParse.replace("{"+ data +"}", datas[data]);
