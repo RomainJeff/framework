@@ -33,6 +33,9 @@ class Router {
         var routesMatcher = new RoutesMatcher(this.HTTP.getURI(), routesContainer.get());
 
         routesMatcher.check();
-        routesMatcher.listen();
+
+        this.HTTP.onURIChange(function () {
+            this.run(routesContainer);
+        }.bind(this));
     }
 }
