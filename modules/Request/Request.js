@@ -7,7 +7,9 @@ class Request {
     constructor(url) {
         this.url = url;
         this.datas = {};
-        this.headers = {};
+        this.headers = {
+            'Content-type': 'application/x-www-form-urlencoded'
+        };
         this.response = {};
         this.callback = function () {};
     }
@@ -63,7 +65,7 @@ class Request {
         };
         
         if (method != 'GET')
-            options.body = JSON.stringify(this.datas);
+            options.body = this.formatBody(this.datas);
 
         fetch(this.url, options)
             .then((response) => {
@@ -73,6 +75,21 @@ class Request {
                 throw new Error(response.statusText);
             })
             .then(this.callback);
+    }
+
+    /**
+     * Format the body
+     * @param array body
+     * @return string
+     */
+    formatBody(body) {
+        var formattedBody = '';
+
+        for (var key in body) {
+            formattedBody += key + '=' + body[key] +'&';
+        }
+
+        return formattedBody;
     }
 
 
