@@ -48,7 +48,12 @@ class RoutesMatcher {
             var matching = this.isMatching(currentRoute.getDecodedPath());
 
             if (matching) {
-                currentRoute.getCallback(currentRoute.getParameters());
+                if (currentRoute.hasMiddleware()) {
+                    currentRoute.getMiddleware(currentRoute.getCallback(), currentRoute.getParameters());
+                } else {
+                    currentRoute.execCallback(currentRoute.getParameters());
+                }
+
                 return;
             }
         }

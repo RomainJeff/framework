@@ -43,7 +43,7 @@ class RouteDecoder {
         var i = 1;
         var datasToInject = {};
 
-        for (var data in this.route.datas) {
+        for (var data in this.route.options.datas) {
             datasToInject[data] = matchedDatas[i];
             i++;
         }
@@ -66,11 +66,44 @@ class RouteDecoder {
     /**
      *
      * Recupere le callback
+     * @return mixed
+     *
+     */
+    getCallback() {
+        return this.route.callback;
+    }
+
+    /**
+     *
+     * Execute le callback
      * @param object parameters
      * @return mixed
      *
      */
-    getCallback(parameters) {
+    execCallback() {
         return this.route.callback(parameters);
+    }
+
+    /**
+     *
+     * Recupere le middleware
+     * @parameters 
+     * @return mixed
+     */
+    getMiddleware(parameters) {
+        return this.route.options.middleware(this.getCallback(), parameters);
+    }
+
+    /**
+     *
+     * Check si la route a un middleware
+     * @return boolean
+     *
+     */
+    hasMiddleware() {
+        if (this.route.options.middleware)
+            return true;
+
+        return false;
     }
 }
