@@ -72,6 +72,7 @@ class Request {
                 if (response.ok === true)
                     return response.text();
 
+                RequestErrorHandler.onError();
                 throw new Error(response.statusText);
             })
             .then(this.callback);
