@@ -80,7 +80,7 @@ class RouteDecoder {
      * @return mixed
      *
      */
-    execCallback() {
+    execCallback(parameters) {
         return this.route.callback(parameters);
     }
 
