@@ -49,7 +49,7 @@ class RoutesMatcher {
 
             if (matching) {
                 if (currentRoute.hasMiddleware()) {
-                    currentRoute.getMiddleware(currentRoute.getCallback(), currentRoute.getParameters());
+                    currentRoute.getMiddleware(currentRoute.getParameters());
                 } else {
                     currentRoute.execCallback(currentRoute.getParameters());
                 }
