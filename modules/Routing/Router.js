@@ -30,12 +30,13 @@ class Router {
      *
      */
     run(routesContainer) {
-        var routesMatcher = new RoutesMatcher(this.HTTP.getURI(), routesContainer.get());
+        var HTTP = this.HTTP;
 
-        routesMatcher.check();
+        window.onhashchange = function () {
+            var routesMatcher = new RoutesMatcher(HTTP.getURI(), routesContainer.get());
+            routesMatcher.check();
+        };
 
-        this.HTTP.onURIChange(function () {
-            this.run(routesContainer);
-        }.bind(this));
+        window.onhashchange();
     }
 }
